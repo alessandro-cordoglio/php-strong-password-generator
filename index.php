@@ -12,11 +12,11 @@ Milestone 4 (BONUS)
 Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme).
 Dare all’utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali. -->
 <?php
-    $letters[]='abcdefghijklmnopqrstuvxwyz';
-    $numbers[]='1234567890';
-    $numbers[]='\!"£$%&/()=?^@#';
-
-
+    function rand_psw($length){
+        $chars='ABCDEFGHIJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuvwxyz1234567890\!"£$%&/()=?^';
+        $password = substr(str_shuffle($chars), 0, $length);
+        return $password;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,8 +32,17 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
     <h1>GENERA UNA PASSWORD SICURA</h1>
     <form class="form p-2 mt-4" action="index.php" method="GET">
         <label for="pswlg">Scegli lunghezza password:</label>
-        <input name="pswlg" id="password" type="text">
-        <button class="btn btn-primary" type="submit">Genera</button>
+        <input name="pswlg" id="password" type="number">
+        <button class="btn btn-primary" name="generate" type="submit">Genera</button>
     </form>
+    <div>
+        <?php 
+             if($_GET['pswlg']>=3 && isset($_GET['generate'])){
+                $pswlength= (int)$_GET['pswlg'];
+                $password= rand_psw($pswlength);
+                echo "La tua password è: {$password}";
+            } 
+        ?>
+    </div>
 </body>
 </html>
