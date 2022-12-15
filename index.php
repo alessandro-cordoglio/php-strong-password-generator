@@ -37,7 +37,10 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
     </form>
     <div>
         <?php 
-             if($_GET['pswlg']>=3 && isset($_GET['generate'])){
+            if($_GET['pswlg']<3){
+                echo "<div class='alert_message'> La psw generata deve essere minimo di 3 caratteri! </div>";
+            }
+            if($_GET['pswlg']>=3 && isset($_GET['generate'])){
                 $pswlength= (int)$_GET['pswlg'];
                 $password= rand_psw($pswlength);
                 echo "La tua password è: {$password}";
@@ -46,3 +49,10 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
     </div>
 </body>
 </html>
+
+<style>
+    .alert_message{
+        background-color: #FF7376;
+        max-width: max-content;
+    }
+</style>
