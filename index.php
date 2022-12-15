@@ -12,11 +12,7 @@ Milestone 4 (BONUS)
 Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme).
 Dare all’utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali. -->
 <?php
-    function rand_psw($length){
-        $chars='ABCDEFGHIJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuvwxyz1234567890\!"£$%&/()=?^';
-        $password = substr(str_shuffle($chars), 0, $length);
-        return $password;
-    }
+ include __DIR__ . '/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +33,7 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
     </form>
     <div>
         <?php 
-            if($_GET['pswlg']<3){
+            if($_GET['pswlg']<3 && isset($_GET['generate'])) {
                 echo "<div class='alert_message'> La psw generata deve essere minimo di 3 caratteri! </div>";
             }
             if($_GET['pswlg']>=3 && isset($_GET['generate'])){
